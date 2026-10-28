@@ -88,10 +88,11 @@
     # already puts lima-full, qemu, docker and krunkit on colima's own PATH;
     # declaring them again would only add a second copy to the profile.
     #
-    # colima keeps its instance state and its generated colima.yaml under
-    # ~/.colima, so none of it is linked — the granularity rule in
-    # modules/home/payloads/shared.nix is what forbids handing that directory
-    # over.
+    # Colima stores profile state in its resolved config directory: COLIMA_HOME
+    # takes precedence; otherwise an existing ~/.colima wins, then
+    # $XDG_CONFIG_HOME/colima (or existing ~/.config/colima), and finally
+    # ~/.colima on macOS. None of that state is linked — the granularity rule
+    # in modules/home/payloads/shared.nix forbids handing that directory over.
     colima
     # The client only, on darwin: nixpkgs defaults clientOnly to !isLinux, so
     # this brings no dockerd — colima's VM provides it. buildxSupport and
